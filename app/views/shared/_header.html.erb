@@ -1,0 +1,20 @@
+<header >
+    <nav> 
+        <ul class="container d-flex align-items-center  list-unstyled gap-5">
+            <li class="">
+                <h1>REserva de Salas</h1>
+            </li>
+        
+            <% if user_signed_in? %>
+            <li class="d-block ms-auto">
+                <%= current_user.email%>
+            </li>
+            <li>
+                <%= link_to "Sair", destroy_user_session_path, method: :delete %>
+            </li>
+            <%end%>
+            
+        </ul>
+
+    </nav>
+</header>
