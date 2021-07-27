@@ -28,6 +28,32 @@
   </tbody>
 </table>
 
+<% today = Date.today %>
+<% days_of_week = (today.beginning_of_week..(today.end_of_week(start_day = Date.beginning_of_week) - 2)).to_a %>
+
+<table class="table">
+  <thead>
+    <th>horários</th>
+    <%= days_of_week.each do |day| %>
+     <th><%= day.strftime("%A") %></th>
+
+    <% end %>
+  </thead>
+  <tbody>
+    <% for i in 6..23 do%>
+      <tr>
+        <th scope="row"> <%= "#{i.to_s}:00" %> </th>
+        <% days_of_week.each do |day| %>
+        <td> <%= day.to_time.advance(hours: i) %></td>
+
+        <% end%>>
+      </tr>
+    <% end %>
+  
+  </tbody>
+
+</table>
+
 <br>
 
 <%= link_to 'New Reserva', new_reserva_path %>
