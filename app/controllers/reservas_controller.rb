@@ -12,7 +12,7 @@ class ReservasController < ApplicationController
 
   # GET /reservas/new
   def new
-    @reserva = Reserva.new
+    @reserva = Reserva.new params[:data]
   end
 
   # GET /reservas/1/edit
@@ -25,9 +25,11 @@ class ReservasController < ApplicationController
 
     respond_to do |format|
       if @reserva.save
+        format.js
         format.html { redirect_to @reserva, notice: "Reserva was successfully created." }
         format.json { render :show, status: :created, location: @reserva }
       else
+        format.js
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reserva.errors, status: :unprocessable_entity }
       end
@@ -64,6 +66,6 @@ class ReservasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reserva_params
-      params.require(:reserva).permit(:solicitante, :data, :solicitante_id, :descricao)
+      params.require(:reserva).permit(:user_id, :solicitante, :data, :descricao)
     end
 end

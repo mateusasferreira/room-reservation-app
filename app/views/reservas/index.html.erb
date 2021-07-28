@@ -18,8 +18,8 @@
       <tr>
         <td><%= reserva.solicitante %></td>
         <td><%= reserva.data %></td>
-        <td><%= reserva.solicitante_id %></td>
         <td><%= reserva.descricao %></td>
+
         <td><%= link_to 'Show', reserva %></td>
         <td><%= link_to 'Edit', edit_reserva_path(reserva) %></td>
         <td><%= link_to 'Destroy', reserva, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -34,7 +34,7 @@
 <table class="table">
   <thead>
     <th>horários</th>
-    <%= days_of_week.each do |day| %>
+    <% days_of_week.each do |day| %>
      <th><%= day.strftime("%A") %></th>
 
     <% end %>
@@ -44,9 +44,15 @@
       <tr>
         <th scope="row"> <%= "#{i.to_s}:00" %> </th>
         <% days_of_week.each do |day| %>
-        <td> <%= day.to_time.advance(hours: i) %></td>
+        <td> 
+        
+        <% if (day.to_time.advance(hours: i) > Time.now) %>
+          <%= link_to 'Disponível', new_reserva_path %>
+        <% end %>        
+        
+        </td>
 
-        <% end%>>
+        <% end%>
       </tr>
     <% end %>
   
@@ -56,4 +62,26 @@
 
 <br>
 
-<%= link_to 'New Reserva', new_reserva_path %>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

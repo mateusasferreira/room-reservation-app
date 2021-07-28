@@ -22,13 +22,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :solicitante_id %>
-    <%= form.number_field :solicitante_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :descricao %>
     <%= form.text_field :descricao %>
+  </div>
+  
+  <div class="field">
+    <%= form.text_field :user_id, :value => current_user.id, type: :hidden%>
   </div>
 
   <div class="actions">
