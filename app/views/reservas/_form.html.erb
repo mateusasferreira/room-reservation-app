@@ -10,15 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  <%slot = params[:data].to_datetime%>
+  <h4>Reservas sala para as <%= slot.strftime('%A(%d) at %H:%M')%></h4>
   <div class="field">
     <%= form.label :solicitante %>
     <%= form.text_field :solicitante %>
   </div>
 
   <div class="field">
-    <%= form.label :data %>
-    <%= form.datetime_select :data %>
+    
+    <%= form.text_field :data, :value => params[:data], type: :hidden %>
   </div>
 
   <div class="field">

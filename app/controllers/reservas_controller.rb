@@ -12,7 +12,7 @@ class ReservasController < ApplicationController
 
   # GET /reservas/new
   def new
-    @reserva = Reserva.new params[:data]
+    @reserva = Reserva.new 
   end
 
   # GET /reservas/1/edit

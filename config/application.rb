@@ -20,5 +20,7 @@ module RailsApp
     # config.eager_load_paths << Rails.root.join("extras")
     config.beginning_of_week = :monday
     config.end_of_week = :friday
+    config.time_zone = "Brasilia"
+    config.active_record.default_timezone = :local
   end
 end
