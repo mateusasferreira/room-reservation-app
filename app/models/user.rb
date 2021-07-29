@@ -6,5 +6,7 @@ class User < ApplicationRecord
 
   has_many :reservas
 
+  # validates :email, uniqueness: true
+
   attr_accessor :data
 end
