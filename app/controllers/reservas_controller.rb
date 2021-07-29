@@ -1,5 +1,6 @@
 class ReservasController < ApplicationController
   before_action :set_reserva, only: %i[ show edit update destroy ]
+  before_action :is_authorized?, only: [:destroy, :edit]
   before_action :authenticate_user!
   # GET /reservas or /reservas.json
   def index
@@ -22,7 +23,6 @@ class ReservasController < ApplicationController
   # POST /reservas or /reservas.json
   def create
     @reserva = Reserva.new(reserva_params)
-
     respond_to do |format|
       if @reserva.save
         format.js
@@ -62,6 +62,13 @@ class ReservasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reserva
       @reserva = Reserva.find(params[:id])
+    end
+    
+    def is_authorized?
+      @reserva = Reserva.find(params[:id])
+      if(@reserva.user_id != current_user.id)
+        redirect_to @reserva, notice: "only the person that scheduled this can do this action"
+      end
     end
 
     # Only allow a list of trusted parameters through.

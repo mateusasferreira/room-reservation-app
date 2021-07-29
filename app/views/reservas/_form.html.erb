@@ -10,25 +10,26 @@
       </ul>
     </div>
   <% end %>
-  <%slot = params[:data].to_datetime%>
-  <h4>Reservas sala para as <%= slot.strftime('%A(%d) at %H:%M')%></h4>
+  <%if params[:data]%>
+  <h4>Reservas sala para as <%=params[:data].to_datetime.strftime("%A(%d) at %H:%M")%></h4>
+  <%end%>
   <div class="field">
     <%= form.label :solicitante %>
-    <%= form.text_field :solicitante %>
+    <%= form.text_field :solicitante, :value => current_user.email, type: :hidden, :required => 'required'%>
   </div>
 
   <div class="field">
     
-    <%= form.text_field :data, :value => params[:data], type: :hidden %>
+    <%= form.text_field :data, :value => params[:data], type: :hidden, :required => 'required' %>
   </div>
 
   <div class="field">
     <%= form.label :descricao %>
-    <%= form.text_field :descricao %>
+    <%= form.text_field :descricao, :required => 'required' %>
   </div>
   
   <div class="field">
-    <%= form.text_field :user_id, :value => current_user.id, type: :hidden%>
+    <%= form.text_field :user_id, :value => current_user.id, type: :hidden, :required => 'required'%>
   </div>
 
   <div class="actions">
