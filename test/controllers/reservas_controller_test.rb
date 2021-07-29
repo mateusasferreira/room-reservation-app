@@ -1,6 +1,14 @@
 require "test_helper"
 
 class ReservasControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    get '/users/sign_in'
+    sign_in users(:one)
+    post user_session_url
+  end
+  
   setup do
     @reserva = reservas(:one)
   end
@@ -17,11 +25,18 @@ class ReservasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reserva" do
     assert_difference('Reserva.count') do
-      post reservas_url, params: { reserva: { data: @reserva.data, descricao: @reserva.descricao, solicitante: @reserva.solicitante, solicitante_id: @reserva.solicitante_id } }
+      post reservas_url, params: { reserva: { data: Date.tomorrow.to_time.at_noon, descricao: "any", solicitante: "any", user_id: 1 } }
     end
 
     assert_redirected_to reserva_url(Reserva.last)
   end
+
+  test "should not create reserva if user_id differs from current user" do 
+    assert_no_difference('Reserva.count') do
+      post reservas_url, params: { reserva: { data: Date.tomorrow.to_time.at_noon.advance(hours:1), descricao: "any", solicitante: "any", user_id: 2 } }
+    end  
+  end
+  
 
   test "should show reserva" do
     get reserva_url(@reserva)
@@ -34,7 +49,7 @@ class ReservasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reserva" do
-    patch reserva_url(@reserva), params: { reserva: { data: @reserva.data, descricao: @reserva.descricao, solicitante: @reserva.solicitante, solicitante_id: @reserva.solicitante_id } }
+    patch reserva_url(@reserva), params: { reserva: { data: @reserva.data, descricao: @reserva.descricao, solicitante: @reserva.solicitante, user_id: @reserva.user_id } }
     assert_redirected_to reserva_url(@reserva)
   end
 

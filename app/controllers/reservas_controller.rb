@@ -1,6 +1,6 @@
 class ReservasController < ApplicationController
   before_action :set_reserva, only: %i[ show edit update destroy ]
-  before_action :is_authorized?, only: [:destroy, :edit]
+  before_action :is_authorized?, only: [:destroy, :edit, :update]
   before_action :authenticate_user!
   # GET /reservas or /reservas.json
   def index
@@ -25,11 +25,9 @@ class ReservasController < ApplicationController
     @reserva = Reserva.new(reserva_params)
     respond_to do |format|
       if @reserva.save
-        format.js
         format.html { redirect_to @reserva, notice: "Reserva was successfully created." }
         format.json { render :show, status: :created, location: @reserva }
       else
-        format.js
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reserva.errors, status: :unprocessable_entity }
       end
