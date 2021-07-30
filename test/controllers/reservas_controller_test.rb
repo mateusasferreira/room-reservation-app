@@ -48,11 +48,6 @@ class ReservasControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update reserva" do
-    patch reserva_url(@reserva), params: { reserva: { data: @reserva.data, descricao: @reserva.descricao, solicitante: @reserva.solicitante, user_id: @reserva.user_id } }
-    assert_redirected_to reserva_url(@reserva)
-  end
-
   test "should destroy reserva" do
     assert_difference('Reserva.count', -1) do
       delete reserva_url(@reserva)

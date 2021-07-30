@@ -3,37 +3,9 @@
 <%end%>
 
 
-<%today = Date.today %>
-<% days_of_week = (today.beginning_of_week..(today.end_of_week(start_day = Date.beginning_of_week) - 2)).to_a %>
+<%= render 'table', current_week: true %>
 
-<table class="table table-light">
-  <thead>
-    <th>horários</th>
-    <% days_of_week.each do |day| %>
-     <th><%=l day, format: :by_name%></th>
-    <% end %>
-  </thead>
-  <tbody>
-    <% for i in 6..23 do%>
-      <tr>
-        <th scope="row"> <%= "#{i.to_s}:00" %> </th>
-        <% days_of_week.each do |day| %>
-          <%slot = day.to_time.advance(hours: i)%>
-          <%reserva = @reservas.find_by(data: slot)%>
-          <td> 
-          <% if reserva%>
-            <%path_name = "Reservado para #{reserva.solicitante}"%>
-            <%= link_to path_name, reserva, class: "link-primary" %>
-          <%else%>
-            <% if (slot > Time.now) %>
-              <%= link_to 'Disponível', new_reserva_path(data: slot), class: "link-primary" %>
-            <% end %>
-          <%end%>
-          </td>
-        <% end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+<h3>Próxima Semana</h3>
+
+<%= render 'table', current_week: false %>
 
