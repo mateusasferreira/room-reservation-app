@@ -3,8 +3,8 @@ pt:
     sessions:
       signed_in: "Logado com sucesso"
       signed_up: "Conta criada com sucesso"
-  registrations:
-    user:
-      destroyed: "Conta cancelada com sucesso"
-      signed_up: "Bem-vindo! Conta criada com sucesso"
+    registrations:
+      user:
+        destroyed: "Conta cancelada com sucesso"
+        signed_up: "Bem-vindo! Conta criada com sucesso"
       
