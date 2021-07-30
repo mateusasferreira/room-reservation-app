@@ -1,5 +1,5 @@
 <%if notice%>
-  <div id="notice" class="alert alert-success"><%= notice %></div>
+  <div id="notice" class="alert alert-success"><%=t notice %></div>
 <%end%>
 <p class="fs-5 mb-4">
   <strong>Solicitante:</strong>
@@ -8,7 +8,7 @@
 
 <p class="fs-5 mb-4">
   <strong>Data:</strong>
-  <%= @reserva.data %>
+  <%= l @reserva.data, format: :short %>
 </p>
 
 <p class="fs-5 mb-4">

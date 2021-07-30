@@ -1,0 +1,8 @@
+pt:
+  devise:
+    sessions:
+      signed_in: "Logado com sucesso"
+  registrations:
+      destroyed: "Conta cancelada com sucesso"
+      signed_up: "Bem-vindo! Conta criada com sucesso"
+      

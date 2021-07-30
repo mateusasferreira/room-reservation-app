@@ -10,7 +10,7 @@
       </div>
     <% end %>
     <%if params[:data]%>
-    <h4>Reservas sala para as <%=params[:data].to_datetime.strftime("%A(%d) at %H:%M")%></h4>
+    <h4>Reservar sala para <%=l params[:data].to_datetime, format: :details%></h4>
     <p class="fs-6"><strong>Solicitante: </strong><%= current_user.email%></p>
     <%end%>
     <div class="field">

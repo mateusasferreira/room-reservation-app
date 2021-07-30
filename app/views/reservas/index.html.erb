@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<%if notice%>
+  <div id="notice" class="alert alert-success"><%= notice %></div>
+<%end%>
 
 
-<% today = Date.today %>
+<%today = Date.today %>
 <% days_of_week = (today.beginning_of_week..(today.end_of_week(start_day = Date.beginning_of_week) - 2)).to_a %>
 
 <table class="table table-light">
   <thead>
     <th>horários</th>
     <% days_of_week.each do |day| %>
-     <th><%= day.strftime("%A") %></th>
+     <th><%=l day, format: :by_name%></th>
     <% end %>
   </thead>
   <tbody>
