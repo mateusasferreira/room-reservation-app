@@ -1,38 +1,40 @@
-<%= form_with(model: reserva) do |form| %>
-  <% if reserva.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
+<div style="max-width: 500px">
 
-      <ul>
-        <% reserva.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: reserva) do |form| %>
+    <% if reserva.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        
+          <% reserva.errors.each do |error| %>
+            <%= error.full_message %>
+          <% end %>
+      </div>
+    <% end %>
+    <%if params[:data]%>
+    <h4>Reservas sala para as <%=params[:data].to_datetime.strftime("%A(%d) at %H:%M")%></h4>
+    <p class="fs-6"><strong>Solicitante: </strong><%= current_user.email%></p>
+    <%end%>
+    <div class="field">
+      <%= form.text_field :solicitante, :value => current_user.email, type: :hidden, :required => 'required'%>
+    </div>
+
+    <div class="field">
+      
+      <%= form.text_field :data, :value => params[:data], type: :hidden, :required => 'required' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :descricao, 'Descrição', class: "form-label" %>
+      <%= form.text_field :descricao, :required => 'required', class: "form-control" %>
+    </div>
+    
+    <div class="field">
+      <%= form.text_field :user_id, :value => current_user.id, type: :hidden, :required => 'required'%>
+    </div>
+
+    <div class="action">
+      <%= form.submit 'Reservar Sala', class: "btn btn-primary text-light mb-1" %>
     </div>
   <% end %>
-  <%if params[:data]%>
-  <h4>Reservas sala para as <%=params[:data].to_datetime.strftime("%A(%d) at %H:%M")%></h4>
-  <%end%>
-  <div class="field">
-    <%= form.label :solicitante %>
-    <%= form.text_field :solicitante, :value => current_user.email, type: :hidden, :required => 'required'%>
-  </div>
 
-  <div class="field">
-    
-    <%= form.text_field :data, :value => params[:data], type: :hidden, :required => 'required' %>
-  </div>
+</div>
 
-  <div class="field">
-    <%= form.label :descricao %>
-    <%= form.text_field :descricao, :required => 'required' %>
-  </div>
-  
-  <div class="field">
-    <%= form.text_field :user_id, :value => current_user.id, type: :hidden, :required => 'required'%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

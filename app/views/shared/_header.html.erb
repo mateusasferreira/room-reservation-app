@@ -1,16 +1,16 @@
-<header >
+<header class="mb-5">
     <nav> 
         <ul class="container d-flex align-items-center  list-unstyled gap-5">
             <li class="">
-                <h1>REserva de Salas</h1>
+                <h1 class="fw-bold ">Reserva de Salas</h1>
             </li>
         
             <% if user_signed_in? %>
             <li class="d-block ms-auto">
-                <%= current_user.email%>
+                <span class="fs-6"><b class="fw-bold">User: </b><%= current_user.email%></span>
             </li>
             <li>
-                <%= link_to "Sair", destroy_user_session_path, method: :delete %>
+                <span class="fs-6"><%= link_to "Sair", destroy_user_session_path, method: :delete %></span>
             </li>
             <%end%>
             

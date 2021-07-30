@@ -1,19 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<%if notice%>
+  <div id="notice" class="alert alert-success"><%= notice %></div>
+<%end%>
+<p class="fs-5 mb-4">
   <strong>Solicitante:</strong>
   <%= @reserva.solicitante %>
 </p>
 
-<p>
+<p class="fs-5 mb-4">
   <strong>Data:</strong>
   <%= @reserva.data %>
 </p>
 
-<p>
+<p class="fs-5 mb-4">
   <strong>Descricao:</strong>
   <%= @reserva.descricao %>
 </p>
 
-<%= link_to 'Edit', edit_reserva_path(@reserva) %> |
-<%= link_to 'Back', reservas_path %>
+<%= link_to 'Back', reservas_path, class: "btn btn-primary text-light"  %>
+<%if @reserva.user_id == current_user.id%>
+  <%= link_to 'Edit', edit_reserva_path(@reserva), class: "btn btn-primary text-light" %>
+  <%= link_to 'Destroy', @reserva, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-light"  %>
+<%end%>
