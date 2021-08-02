@@ -27,6 +27,6 @@ module RailsApp
     config.beginning_of_week = :monday
     config.end_of_week = :friday
     config.time_zone = "Brasilia"
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = "Brasilia"
   end
 end
