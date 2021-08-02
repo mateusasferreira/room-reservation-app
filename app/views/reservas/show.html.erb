@@ -8,7 +8,7 @@
 
 <p class="fs-5 mb-4">
   <strong>Data:</strong>
-  <%= l @reserva.data, format: :short %>
+  <%= l Time.parse(@reserva.data.to_s), format: :short %>
 </p>
 
 <p class="fs-5 mb-4">
