@@ -18,7 +18,7 @@
       <tr>
         <th scope="row"> <%= "#{i.to_s}:00" %> </th>
         <% days_of_week.each do |day| %>
-          <%=slot = day.to_time.advance(hours: i)%>
+          <%slot = day.to_time.advance(hours: i)%>
           <%reserva = @reservas.find_by(data: slot)%>
           <td> 
           <% if reserva%>
