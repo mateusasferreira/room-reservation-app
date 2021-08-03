@@ -9,8 +9,9 @@
           <% end %>
       </div>
     <% end %>
-    <%if date = params[:data] %>
-    <h4>Reservar sala para <%=l params[:data].to_datetime, format: :details%></h4>
+    <% date = params[:data]%>
+    <%if date %>
+    <h4>Reservar sala para <%=l date.to_datetime, format: :details%></h4>
     <p class="fs-6"><strong>Solicitante: </strong><%= current_user.email%></p>
     <%end%>
     <div class="field">
@@ -19,7 +20,7 @@
 
     <div class="field">
       
-      <%= form.text_field :data, :value => params[:data], type: :hidden, :required => 'required' %>
+      <%= form.text_field :data, :value => date.to_datetime.utc, type: :hidden, :required => 'required' %>
     </div>
 
     <div class="mb-3">
