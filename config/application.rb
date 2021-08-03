@@ -26,7 +26,6 @@ module RailsApp
     config.i18n.fallbacks = true
     config.beginning_of_week = :monday
     config.end_of_week = :friday
-    config.time_zone = "Brasilia"
-    
+    config.time_zone = "Brasilia"    
   end
 end
